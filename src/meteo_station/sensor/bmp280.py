@@ -37,6 +37,8 @@ class BMP280(SensorBase):
         self._calibration_p9 = None
 
     def read(self):
+        self._read_calibration()
+
         self._bus.write_byte_data(
             self._address,
             self.__CTRL_MEAS_REGISTER,
