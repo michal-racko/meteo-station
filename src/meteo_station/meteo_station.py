@@ -92,8 +92,8 @@ class MeteoStation:
         """
         Returns of the time series or 0 if it is less than its spread
         """
-        x = np.arange(self._sliding_window) * self._measurement_interval
         timeseries = self._get_timeseries(values)
+        x = np.arange(len(timeseries)) * self._measurement_interval
         A = np.vstack([x, np.ones(len(x))]).T
 
         (_, slope), res, _, _ = np.linalg.lstsq(A, timeseries, rcond=None)
