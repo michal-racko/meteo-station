@@ -11,9 +11,9 @@ class BMP180(SensorBase):
     """
 
     # Registers
-    __CALIBRATION_AC1 = 0xAA
-
+    __CALIBRATION_REGISTER = 0xAA
     __CONTROL_REGISTER = 0xF4
+
     __TEMPERATURE_DATA_REGISTER = 0xF6
     __PRESSURE_DATA_REGISTER = 0xF6
 
@@ -106,7 +106,7 @@ class BMP180(SensorBase):
     def _read_calibration(self):
         calibration = self._bus.read_i2c_block_data(
             self._address,
-            self.__CALIBRATION_AC1,
+            self.__CALIBRATION_REGISTER,
             22
         )
 
