@@ -96,7 +96,7 @@ class MeteoStation:
         x = np.arange(len(timeseries)) * self._measurement_interval
         A = np.vstack([x, np.ones(len(x))]).T
 
-        (_, slope), res, _, _ = np.linalg.lstsq(A, timeseries, rcond=None)
+        (slope, _), res, _, _ = np.linalg.lstsq(A, timeseries, rcond=None)
         if len(res) == 0 or res[0] == 0:
             spread = 0
         else:
@@ -164,7 +164,10 @@ class MeteoStation:
         while True:
             if time.time() - self._last_measurement_at > self._measurement_interval:
                 self._last_measurement_at = time.time()
-                self._read()
+                try:
+                    self._read()
+                except:
+                    logger.exception(f'Reading failed')
 
             if time.time() - self._metrics_updated_at > self._metric_update_interval:
                 self._update_metrics()
