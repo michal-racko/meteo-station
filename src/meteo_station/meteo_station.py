@@ -36,31 +36,32 @@ class MeteoStation:
 
     @property
     def outside_temperature(self) -> float:
+        print(self._outside_temeprature[:self._offset])
         if self._first_measurement_round_done:
             return self._outside_temeprature.mean()
         else:
-            return self._outside_temeprature[:self._offset + 1].mean()
+            return self._outside_temeprature[:self._offset].mean()
 
     @property
     def outside_pressure(self) -> float:
         if self._first_measurement_round_done:
             return self._outside_pressure.mean()
         else:
-            return self._outside_pressure[:self._offset + 1].mean()
+            return self._outside_pressure[:self._offset].mean()
 
     @property
     def outside_humidity(self) -> float:
         if self._first_measurement_round_done:
             return self._outside_humidity.mean()
         else:
-            return self._outside_humidity[:self._offset + 1].mean()
+            return self._outside_humidity[:self._offset].mean()
 
     @property
     def inside_temperature(self) -> float:
         if self._first_measurement_round_done:
             return self._inside_temperature.mean()
         else:
-            return self._inside_temperature[self._offset + 1].mean()
+            return self._inside_temperature[:self._offset].mean()
 
     def _read(self):
         if self._offset >= self._n_measurements:
