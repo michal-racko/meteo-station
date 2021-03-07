@@ -97,7 +97,10 @@ class MeteoStation:
         A = np.vstack([x, np.ones(len(x))]).T
 
         (_, slope), res, _, _ = np.linalg.lstsq(A, timeseries, rcond=None)
-        spread = np.sqrt(res[0] / len(timeseries))
+        if len(res) == 0 or res[0] == 0:
+            spread = 0
+        else:
+            spread = np.sqrt(res[0] / len(timeseries))
 
         if abs(slope) > spread:
             return slope
@@ -108,7 +111,7 @@ class MeteoStation:
         """
         Prepares time series for the given value array
         """
-        if self._first_measurement_round_done:
+        if not self._first_measurement_round_done:
             return values[:self._offset]
         else:
             return np.concatenate((
