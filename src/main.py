@@ -6,7 +6,8 @@ from meteo_station import MeteoStation
 from meteo_station.settings import (
     MEASUREMENT_INTERVAL,
     SLIDING_WINDOW,
-    PROMETHEUS_PORT
+    PROMETHEUS_PORT,
+    LOG_LEVEL
 )
 
 logging.basicConfig(
