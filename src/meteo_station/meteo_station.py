@@ -166,6 +166,8 @@ class MeteoStation:
                 self._last_measurement_at = time.time()
                 try:
                     self._read()
+                except KeyboardInterrupt:
+                    break
                 except:
                     logger.exception(f'Reading failed')
 

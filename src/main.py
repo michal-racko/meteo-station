@@ -17,8 +17,10 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 if __name__ == '__main__':
+    logger.info(f'Starting prometheus on port: {PROMETHEUS_PORT}')
     start_http_server(PROMETHEUS_PORT)
 
+    logger.info('Starting the meteo station')
     meteo = MeteoStation(
         measurement_interval=MEASUREMENT_INTERVAL,
         sliding_window=SLIDING_WINDOW
