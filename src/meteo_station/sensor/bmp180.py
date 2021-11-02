@@ -67,6 +67,7 @@ class BMP180(SensorBase):
 
         self.temperature = int(self._b5 + 8) >> 4
         self.temperature /= 10
+        self.temperature -= 2
 
     def _read_pressure(self):
         if self._b5 is None:
